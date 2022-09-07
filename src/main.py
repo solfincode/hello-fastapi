@@ -57,5 +57,5 @@ async def delete_item(id: int):
     for el in db:
         if (id == el.id):
             deleted.append(el)
-            del db[id]
+            db.pop(id)
     return {"deleted": deleted}
