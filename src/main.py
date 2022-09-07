@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -14,6 +14,7 @@ class Item(BaseModel):
     title: str
     description: Union[str, None] = None
     body: Union[str, None] = None
+    price: int
 
 
 @app.get("/")
@@ -33,7 +34,7 @@ async def read_item():
 
 
 @app.get("/select_item/")
-async def select_item(title: str):
+async def select_item(title: str, price: Optional[int] = None):
     selected = []
     for el in db:
         if (title == el.title):
