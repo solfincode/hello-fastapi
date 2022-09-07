@@ -10,6 +10,7 @@ db = []
 
 
 class Item(BaseModel):
+    id: int
     title: str
     description: Union[str, None] = None
     body: Union[str, None] = None
@@ -27,5 +28,11 @@ def create(item: Item):
 
 
 @app.get("/items")
-def read_item():
+async def read_item():
     return db
+
+
+@app.get("/items/{id}")
+async def get_item(id):
+    result = db[int(id)]
+    return result
