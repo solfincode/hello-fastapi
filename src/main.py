@@ -32,6 +32,15 @@ async def read_item():
     return db
 
 
+@app.get("/select_item/")
+async def select_item(title: str):
+    selected = []
+    for el in db:
+        if (title == el.title):
+            selected.append(el)
+    return selected
+
+
 @app.get("/items/{id}")
 async def get_item(id: int):
     selected = []
